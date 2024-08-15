@@ -1,0 +1,54 @@
+version: '3'
+
+networks:
+  dev:
+
+services:
+  nginx:
+    image: nginx:stable-alpine
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - './nginx.conf:/etc/nginx/nginx.conf'
+      - '/etc/letsencrypt:/etc/letsencrypt' # Монтирование всех сертификатов
+    depends_on:
+      - backend
+      - frontend
+    networks:
+      - dev
+
+  backend:
+    build:
+      context: ./tg-web-app-bot
+    ports:
+      - '3001:3001'
+    environment:
+      - DATABASE_URL=postgres://hmmrfll:12345678@postgres:5432/bcasino
+    depends_on:
+      - postgres
+    networks:
+      - dev
+
+  frontend:
+    build:
+      context: ./tg-web-app-front
+    ports:
+      - '3000:3000'
+    networks:
+      - dev
+
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    environment:
+      POSTGRES_DB: bcasino
+      POSTGRES_USER: your_username
+      POSTGRES_PASSWORD: your_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - dev
+
+volumes:
+  postgres_data:

@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "path-browserify": "^1.0.1",
+    "telegraf": "^4.16.3",
+    "tweetnacl": "^1.0.3"
+  }
+}

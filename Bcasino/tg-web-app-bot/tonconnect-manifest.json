@@ -1,0 +1,11 @@
+{
+    "name": "Bcasino",
+    "url": "https://your-app-url",
+    "iconUrl": "https://7b95-37-212-9-148.ngrok-free.app/main-page/wallet.png",
+    "bridge": {
+      "type": "toncenter",
+      "url": "https://testnet.toncenter.com/api/v2/jsonRPC"
+    },
+    "dappUrl": "https://7b95-37-212-9-148.ngrok-free.app"
+  }
+  
